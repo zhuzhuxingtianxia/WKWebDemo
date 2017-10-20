@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="format-detection" content="telephone=no" />
+        <title>导航标题</title>
+        
+        <!-- css -->
+        <style type="text/css">
+            
+        </style>
+        
+    </head>
+    <body>
+        <div style="text-align:center;">
+            <!--style设置到顶部的距离30px-->
+            <button id="button1" style="margin-top:30px">
+                js端实现跳转
+            </button>
+            <div>
+                <a href="tel:4008008080" class="tel_phone" id="shop_baidu">
+                    <h>打电话</h>
+                </a>
+            </div>
+            
+            <button id="button2" style="margin-top:30px">
+                oc端实现跳转
+            </button>
+            
+            <div id="divid" style="padding-top:20px">
+                div触发事件
+            </div>
+            
+            <a href="javascript:void(0);" id="link" class="linkclass">a标签测试</a></br>
+            <img onclick="alert('OK')" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1508490516026&di=8d3c1a293480a8efc09662a77dd553db&imgtype=0&src=http%3A%2F%2Fm.qqzhi.com%2Fupload%2Fimg_2_1884993340D1032562414_23.jpg"/><br/>
+            <!-- img在a中是否也有onclick事件 --->
+            <a href="http://www.mf08s.com/y/q/UploadFiles_q/20110513/2011051309100640.jpg">
+                <h>下面点击图片跳转</h><br/>
+                <img src="http://www.mf08s.com/y/q/UploadFiles_q/20110513/2011051309100640.jpg"/>
+            </a>
+            
+        </div>
+        <!-- script  -->
+        <script>
+            var event1 = document.getElementById('button1');
+            event1.onclick = function (param){
+                handleMothed1({className:"HomeController",
+                              login:"false",
+                              param:{title:"百度网页",
+                                     urlString:"https://m.youjuke.com/Distributor/rebate_index?uid=(null)&x=37.79209185921442&y=-122.4003580605694"}});
+            };
+        function handleMothed1(parm){
+            window.webkit.messageHandlers.handleMothed1.postMessage(parm);
+        }
+        
+        </script>
+        
+    </body>
+    
+</html>
