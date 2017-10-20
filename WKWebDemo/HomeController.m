@@ -8,9 +8,10 @@
 #import <objc/runtime.h>
 #import "HomeController.h"
 #import "WKPregressWebView.h"
-
-@interface HomeController ()<WKNavigationDelegate,WKHandlerDelegate>
+#import "MJRefresh.h"
+@interface HomeController ()<WKNavigationDelegate,WKHandlerDelegate,UIWebViewDelegate>
 @property(nonatomic,strong)WKPregressWebView *webWkView;
+@property(nonatomic,strong)UIWebView  *webview;
 @end
 
 @implementation HomeController
@@ -18,9 +19,42 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title = @"主页";
+    self.navigationItem.title = @"WK主页";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"切换web" style:UIBarButtonItemStylePlain target:self action:@selector(changeWeb)];
     
     [self buildWKwebView];
+}
+
+-(void)changeWeb{
+    static BOOL change = YES;
+    if (change) {
+        _webWkView = nil;
+        self.navigationItem.title = @"Web主页";
+        [self buildwebView];
+        change = NO;
+    }else{
+        _webview = nil;
+        self.navigationItem.title = @"WK主页";
+       [self buildWKwebView];
+        change = YES;
+    }
+}
+
+-(void)buildwebView{
+    _webview = [[UIWebView alloc] initWithFrame:self.view.bounds];
+    _webview.delegate = self;
+    [self.view addSubview:_webview];
+    
+    _webview.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadWebView)];
+    [self loadWebView];
+}
+
+-(void)loadWebView{
+    if (_urlString) {
+        [_webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlString]]];
+    }else{
+        [_webview loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"demo" ofType:@"html"]]]];
+    }
 }
 
 -(void)buildWKwebView{
@@ -29,7 +63,7 @@
     self.webWkView.navigationDelegate = self;
     self.webWkView.handlerDelegate = self;
     [self.view addSubview:self.webWkView];
-    //self.webWkView.scrollView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadWKWeb)];
+    self.webWkView.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadWKWeb)];
     
     self.webWkView.handlerMessageNames = @[@"handleMothed1",@"handleMothed2",@"outEvaluate"];
     
@@ -189,13 +223,13 @@
 // 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
     NSLog(@"========5");
-    //[webView.scrollView.header endRefreshing];
+    [webView.scrollView.mj_header endRefreshing];
 }
 
 //页面加载失败时调用
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation{
     NSLog(@"=====6fail");
-    //[webView.scrollView.header endRefreshing];
+    [webView.scrollView.mj_header endRefreshing];
 }
 
 // 接收到服务器跳转请求之后再执行
@@ -206,6 +240,13 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+#pragma mark --
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    [webView.scrollView.mj_header endRefreshing];
+}
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    [webView.scrollView.mj_header endRefreshing];
 }
 
 /*
