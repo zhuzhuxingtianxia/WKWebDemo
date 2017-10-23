@@ -9,7 +9,7 @@
 #import "HomeController.h"
 #import "WKPregressWebView.h"
 #import "MJRefresh.h"
-@interface HomeController ()<WKNavigationDelegate,WKHandlerDelegate,UIWebViewDelegate>
+@interface HomeController ()<WKNavigationDelegate,WKUIDelegate,WKHandlerDelegate,UIWebViewDelegate>
 @property(nonatomic,strong)WKPregressWebView *webWkView;
 @property(nonatomic,strong)UIWebView  *webview;
 @end
@@ -64,6 +64,7 @@
     
     self.webWkView = [[WKPregressWebView alloc] initWKFrame:self.view.bounds];
     self.webWkView.navigationDelegate = self;
+    self.webWkView.UIDelegate = self;
     self.webWkView.handlerDelegate = self;
     _webWkView.progressColor = [UIColor redColor];
     [self.view addSubview:self.webWkView];
@@ -244,6 +245,54 @@
 - (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation{
     NSLog(@"======7");
 }
+
+#pragma mark -- WKUIDelegate
+- (WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures{
+
+    NSLog(@"%@\n", NSStringFromSelector(_cmd));
+    return nil;
+}
+
+- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(nonnull void (^)(void))completionHandler{
+    //js 里面的alert实现，如果不实现，网页的alert函数无效
+   NSLog(@"%@\n", NSStringFromSelector(_cmd));
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message?:@"" preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:([UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler();
+    }])];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL))completionHandler {
+    //  js 里面的alert实现，如果不实现，网页的alert函数无效  ,
+   NSLog(@"%@\n", NSStringFromSelector(_cmd));
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message?:@"" preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:([UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler(NO);
+    }])];
+    [alertController addAction:([UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler(YES);
+    }])];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString *))completionHandler{
+    //用于和JS交互，弹出输入框
+   NSLog(@"%@\n", NSStringFromSelector(_cmd));
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:prompt message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.text = defaultText;
+    }];
+    [alertController addAction:([UIAlertAction actionWithTitle:@"完成" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler(alertController.textFields[0].text?:@"");
+    }])];
+    
+    
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
