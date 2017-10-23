@@ -9,7 +9,7 @@
 #import "WKPregressWebView.h"
 @interface ZJProgressView : UIView
 @property (nonatomic) float progress;
-
+@property(nonatomic,strong)UIColor  *progressColor;
 @property (nonatomic) UIView *progressBarView;
 @property (nonatomic) NSTimeInterval barAnimationDuration; // default 0.1
 @property (nonatomic) NSTimeInterval fadeAnimationDuration; // default 0.27
@@ -74,6 +74,12 @@
     }
 }
 
+-(void)setProgressColor:(UIColor *)progressColor{
+    if (progressColor) {
+        _progressBarView.backgroundColor = progressColor;
+    }
+}
+
 @end
 
 
@@ -100,6 +106,7 @@
 }
 
 -(void)setup{
+    self.showNavbar = YES;
     [self addListen];
     //是否允许右滑返回上个链接，左滑前进
     self.allowsBackForwardNavigationGestures = NO;
@@ -126,22 +133,48 @@
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
     if (object == self) {
-        if ([keyPath isEqualToString:@"estimatedProgress"] && !self.hidePregress) {
+        if ([keyPath isEqualToString:@"estimatedProgress"] && !self.hideProgress) {
             id objcVC;
             if (self.handlerDelegate) {
                 objcVC = self.handlerDelegate;
             }else{
                 objcVC = self.navigationDelegate;
             }
-            if ([objcVC isKindOfClass:[UIViewController class]] && !self.progressView.superview) {
-                UIViewController *vc = (UIViewController*)objcVC;
-                CGFloat progressBarHeight = 2.f;
-                CGRect navigationBarBounds = vc.navigationController.navigationBar.bounds;
-                CGRect barFrame = CGRectMake(0, navigationBarBounds.size.height - progressBarHeight, navigationBarBounds.size.width, progressBarHeight);
-                self.progressView.frame = barFrame;
-                [vc.navigationController.navigationBar addSubview:_progressView];
+            if (_showNavbar) {
+                if ([objcVC isKindOfClass:[UIViewController class]] && !self.progressView.superview) {
+                    UIViewController *vc = (UIViewController*)objcVC;
+                    CGFloat progressBarHeight = 2.f;
+                    CGRect navigationBarBounds = vc.navigationController.navigationBar.bounds;
+                    CGRect barFrame = CGRectMake(0, navigationBarBounds.size.height - progressBarHeight, navigationBarBounds.size.width, progressBarHeight);
+                    self.progressView.frame = barFrame;
+                    
+                    [vc.navigationController.navigationBar addSubview:_progressView];
+                }
+            }else {
+                if(!self.progressView.superview){
+                    CGFloat progressBarHeight = 2.f;
+                    CGRect barFrame = CGRectZero;
+                    if (self.frame.origin.y == 0 && ((UIViewController*)objcVC).navigationController.navigationBar.hidden == NO) {
+                        CGFloat statusBarH = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
+                        CGSize navSize = ((UIViewController*)objcVC).navigationController.navigationBar.bounds.size;
+                        barFrame = CGRectMake(0, statusBarH+navSize.height, navSize.width, progressBarHeight);
+                    }else{
+                       barFrame = CGRectMake(0, 0, self.bounds.size.width, progressBarHeight);
+                    }
+                    
+                    if (self.translatesAutoresizingMaskIntoConstraints == NO) {
+                        [self layoutIfNeeded];
+                    }
+                    self.progressView.frame = barFrame;
+                    
+                    [self addSubview:_progressView];
+                }
+                
             }
             
+            if (self.progressColor) {
+                self.progressView.progressColor = self.progressColor;
+            }
             [self.progressView setAlpha:1.0f];
             [self.progressView setProgress:self.estimatedProgress animated:YES];
             if(self.estimatedProgress >= 1.0f) {
@@ -157,6 +190,9 @@
         }else if ([keyPath isEqualToString:@"loading"]){
             if (self.loading) {
                 //正在加载
+                
+            }else{
+              //加载完成
             }
         }else if ([keyPath isEqualToString:@"title"]){
             id objcVC;
@@ -231,7 +267,6 @@
         [_config.userContentController addScriptMessageHandler:self name:messageName];
     }
 }
-
 
 #pragma mark -- getter
 -(WKWebViewConfiguration*)config {

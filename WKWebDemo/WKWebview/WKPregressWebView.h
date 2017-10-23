@@ -18,12 +18,18 @@
 -(instancetype)initWKFrame:(CGRect)frame;
 -(instancetype)initWKWeb;
 
-//是否隐藏进度条，默认NO
-@property(nonatomic,assign)BOOL  hidePregress;
 //回调代理
 @property(nonatomic,weak)id <WKHandlerDelegate> handlerDelegate;
 //设置消息名字
 @property(nonatomic,strong)NSArray<NSString*> *handlerMessageNames;
+
+//是否显示在导航条上，默认显示在导航条上YES。
+@property(nonatomic,assign)BOOL  showNavbar;
+//进度条颜色，默认safari进度条颜色
+@property(nonatomic,strong)UIColor  *progressColor;
+//是否隐藏进度条，默认NO
+@property(nonatomic,assign)BOOL  hideProgress;
+
 /*
  若不需要注册js代码，则可以不使用该方法
  elementId是网页内需要操作标签的id.

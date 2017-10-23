@@ -21,7 +21,6 @@
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"WK主页";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"切换web" style:UIBarButtonItemStylePlain target:self action:@selector(changeWeb)];
-    
     [self buildWKwebView];
 }
 
@@ -62,6 +61,7 @@
     self.webWkView = [[WKPregressWebView alloc] initWKFrame:self.view.bounds];
     self.webWkView.navigationDelegate = self;
     self.webWkView.handlerDelegate = self;
+    _webWkView.progressColor = [UIColor redColor];
     [self.view addSubview:self.webWkView];
     self.webWkView.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadWKWeb)];
     
