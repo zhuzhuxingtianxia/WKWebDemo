@@ -5,11 +5,11 @@ WKWebView的使用
 
 <div style="text-align:center;display: flex;justify-content:center">
 <div> 
-<h>UIWebView加载后的内存占用</h>
+<div>UIWebView加载后的内存占用</div>
 <img src="https://github.com/zhuzhuxingtianxia/WKWebDemo/blob/master/web.png" >
 </div>
 <div>
-<h>WKWebView加载后内存占用</h>
+<div>WKWebView加载后内存占用</div>
 <img src="https://github.com/zhuzhuxingtianxia/WKWebDemo/blob/master/wk.png" >
 </div>
 </div>
