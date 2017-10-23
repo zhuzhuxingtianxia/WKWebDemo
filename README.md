@@ -5,7 +5,7 @@ WKWebView的使用
 UIWebView加载后的内存占用 </tb> UIWebView刷新时内存占用
 [ ![img](https://github.com/zhuzhuxingtianxia/WKWebDemo/blob/master/web.png)
 
-![img](https://github.com/zhuzhuxingtianxia/WKWebDemo/blob/master/mjweb.png) ]
+![img](https://github.com/zhuzhuxingtianxia/WKWebDemo/blob/master/mjweb.png) ]()
 
 WKWebView加载和刷新时基本差不多</br>
 ![img](https://github.com/zhuzhuxingtianxia/WKWebDemo/blob/master/wk.png)
