@@ -107,6 +107,10 @@
 
 -(void)setup{
     self.showNavbar = YES;
+    
+    //比如我在这个时候保存了Cookie
+    [self saveCookie];
+    
     [self addListen];
     //是否允许右滑返回上个链接，左滑前进
     self.allowsBackForwardNavigationGestures = NO;
@@ -261,6 +265,82 @@
     }
 }
 
+#pragma mark -- Cookie
+//比如你在登录成功时，保存Cookie
+- (void)saveCookie{
+    /*
+     //如果从已有的地方保存Cookie，比如登录成功
+     NSArray *allCookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
+     for (NSHTTPCookie *cookie in allCookies) {
+     if ([cookie.name isEqualToString:DAServerSessionCookieName]) {
+     NSDictionary *dict = [[NSUserDefaults standardUserDefaults] dictionaryForKey:DAUserDefaultsCookieStorageKey];
+     if (dict) {
+     NSHTTPCookie *localCookie = [NSHTTPCookie cookieWithProperties:dict];
+     if (![cookie.value isEqual:localCookie.value]) {
+     NSLog(@"本地Cookie有更新");
+     }
+     }
+     [[NSUserDefaults standardUserDefaults] setObject:cookie.properties forKey:DAUserDefaultsCookieStorageKey];
+     [[NSUserDefaults standardUserDefaults] synchronize];
+     break;
+     }
+     }
+     */
+    
+    NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:@{
+                                                                NSHTTPCookieName: DAServerSessionCookieName,
+                                                                NSHTTPCookieValue: @"1314521",
+                                                                NSHTTPCookieDomain: @".baidu.com",
+                                                                NSHTTPCookiePath: @"/"
+                                                                }];
+    [[NSUserDefaults standardUserDefaults] setObject:cookie.properties forKey:DAUserDefaultsCookieStorageKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+/**
+ 修复打开链接Cookie丢失问题
+ 
+ @param request 请求
+ @return 一个fixedRequest
+ */
+- (NSURLRequest *)fixRequest:(NSURLRequest *)request{
+    NSMutableURLRequest *fixedRequest;
+    if ([request isKindOfClass:[NSMutableURLRequest class]]) {
+        fixedRequest = (NSMutableURLRequest *)request;
+    } else {
+        fixedRequest = request.mutableCopy;
+    }
+    //防止Cookie丢失
+    NSDictionary *dict = [NSHTTPCookie requestHeaderFieldsWithCookies:[NSHTTPCookieStorage sharedHTTPCookieStorage].cookies];
+    if (dict.count) {
+        NSMutableDictionary *mDict = request.allHTTPHeaderFields.mutableCopy;
+        [mDict setValuesForKeysWithDictionary:dict];
+        fixedRequest.allHTTPHeaderFields = mDict;
+    }
+    return fixedRequest;
+}
+
+- (NSString *)cookieString{
+    NSMutableString *script = [NSMutableString string];
+    for (NSHTTPCookie *cookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]) {
+        // Skip cookies that will break our script
+        if ([cookie.value rangeOfString:@"'"].location != NSNotFound) {
+            continue;
+        }
+        // Create a line that appends this cookie to the web view's document's cookies
+        NSString *string = [NSString stringWithFormat:@"%@=%@;domain=%@;path=%@",
+                            cookie.name,
+                            cookie.value,
+                            cookie.domain,
+                            cookie.path ?: @"/"];
+        if (cookie.secure) {
+            string = [string stringByAppendingString:@";secure=true"];
+        }
+        [script appendFormat:@"document.cookie='%@'; \n", string];
+    }
+    return script;
+}
+
 #pragma mark -- setter
 -(void)setHandlerMessageNames:(NSArray<NSString *> *)handlerMessageNames{
     for (NSString *messageName in handlerMessageNames) {
@@ -288,5 +368,6 @@
     }
     return _progressView;
 }
+
 
 @end

@@ -15,27 +15,31 @@
 @end
 
 @implementation HomeController
+-(void)ocTojs{
+    
+    //调用js方法
+    [self.webWkView evaluateJavaScript:@"changeColor()" completionHandler:^(id _Nullable obj, NSError * _Nullable error) {
+        NSLog(@"调用evaluateJavaScript异步获取：%@", obj);
+    }];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"WK主页";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"切换web" style:UIBarButtonItemStylePlain target:self action:@selector(changeWeb)];
-    [self buildWKwebView];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"调用js" style:UIBarButtonItemStylePlain target:self action:@selector(ocTojs)];
+    [self changeWeb];
 }
 
 -(void)changeWeb{
-    static BOOL change = YES;
+  BOOL change = YES;
     if (change) {
-        _webWkView = nil;
+        self.navigationItem.title = @"WK主页";
+        [self buildWKwebView];
+    }else{
         self.navigationItem.title = @"Web主页";
         [self buildwebView];
-        change = NO;
-    }else{
-        _webview = nil;
-        self.navigationItem.title = @"WK主页";
-       [self buildWKwebView];
-        change = YES;
+        
     }
 }
 
@@ -92,6 +96,40 @@
 }
 
 #pragma mark - WKHandler
+- (void)userContent:(WKUserContentController *)userContent didReceiveScriptMessage:(WKScriptMessage *)message{
+    if ([message.body isKindOfClass:[NSDictionary class]]) {
+        if ([message.body[@"login"] boolValue]) {
+            if([message.body[@"login"] boolValue]){
+                
+                //如果没有登录先跳转到一个登录的界面中去
+                
+            }else{
+                if (message.body[@"className"]) {
+                    id createClass = [[NSClassFromString(message.body[@"className"]) alloc] init];
+                    BOOL ispush = [self pushToClass:createClass parm:message.body[@"param"]];
+                    if (createClass && ispush) {
+                        [self.navigationController pushViewController:createClass animated:YES];
+                    }
+                    
+                    
+                }
+                
+            }
+        }else{
+            if (message.body[@"className"]) {
+                id createClass = [[NSClassFromString(message.body[@"className"]) alloc] init];
+                [self pushToClass:createClass parm:message.body[@"param"]];
+                [self.navigationController pushViewController:createClass animated:YES];
+                
+            }
+        }
+    }else if (message.body){
+        
+        
+    }
+    
+}
+
 -(BOOL)pushToClass:(id)vc parm:(id)parm{
     if (!vc) {
         return NO;
@@ -132,37 +170,6 @@
     }
     
     return YES;
-}
-
-- (void)userContent:(WKUserContentController *)userContent didReceiveScriptMessage:(WKScriptMessage *)message{
-    if (message.body) {
-        if ([message.body[@"login"] boolValue]) {
-            if([message.body[@"login"] boolValue]){
-                
-                //如果没有登录先跳转到一个登录的界面中去
-                
-            }else{
-                if (message.body[@"className"]) {
-                    id createClass = [[NSClassFromString(message.body[@"className"]) alloc] init];
-                    BOOL ispush = [self pushToClass:createClass parm:message.body[@"param"]];
-                    if (createClass && ispush) {
-                        [self.navigationController pushViewController:createClass animated:YES];
-                    }
-                    
-                    
-                }
-                
-            }
-        }else{
-            if (message.body[@"className"]) {
-                id createClass = [[NSClassFromString(message.body[@"className"]) alloc] init];
-                [self pushToClass:createClass parm:message.body[@"param"]];
-                [self.navigationController pushViewController:createClass animated:YES];
-                
-            }
-        }
-    }
-    
 }
 
 #pragma mark -- WKNavigationDelegate
@@ -223,6 +230,7 @@
 // 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
     NSLog(@"========5");
+
     [webView.scrollView.mj_header endRefreshing];
 }
 

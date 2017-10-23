@@ -10,4 +10,5 @@
 
 @interface MyController : UIViewController
 @property(nonatomic,copy)NSString *name;
+@property(nonatomic,copy)NSString *urlString;
 @end
