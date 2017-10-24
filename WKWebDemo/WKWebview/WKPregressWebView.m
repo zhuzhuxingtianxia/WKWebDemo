@@ -106,7 +106,7 @@
 }
 
 -(void)setup{
-    self.showNavbar = YES;
+    self.showNavbar = NO;
     
     //比如我在这个时候保存了Cookie
     [self saveCookie];
@@ -227,15 +227,18 @@
     
     params = [self paramsTransformation:params];
     
-    NSString *jstest = [NSString stringWithFormat:
-                        @"var element = document.getElementById('%@');"                                               "element.onclick = function(param){"
+    NSString *jsCode = [NSString stringWithFormat:
+                        @"var element = document.getElementById('%@');"
+                        "if(element){"
+                          "element.onclick = function(param){"
                                       "%@(%@);"
                             "};"
+                        "}"
                         "function %@(param){"
                                "window.webkit.messageHandlers.%@.postMessage(param);"
                         "};",elementId,methodName,params,methodName,methodName];
-    
-    WKUserScript *JSScript = [[WKUserScript alloc] initWithSource:jstest injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:NO];
+    //这里可以设置一个字典容器，把jscode保存，在loading完成后判断是否有该元素再添加对应的脚本。
+    WKUserScript *JSScript = [[WKUserScript alloc] initWithSource:jsCode injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:NO];
     [self.configuration.userContentController addUserScript:JSScript];
     
 }
