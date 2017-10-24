@@ -82,6 +82,34 @@
 
 @end
 
+//防止循环强引用问题
+@interface WeakScriptMessageDelegate : NSObject<WKScriptMessageHandler>
+
+@property (nonatomic, weak) id<WKScriptMessageHandler> scriptDelegate;
+
+- (instancetype)initWithDelegate:(id<WKScriptMessageHandler>)scriptDelegate;
+
+@end
+
+@implementation WeakScriptMessageDelegate
+
+- (instancetype)initWithDelegate:(id<WKScriptMessageHandler>)scriptDelegate{
+    self = [super init];
+    if (self) {
+        _scriptDelegate = scriptDelegate;
+    }
+    return self;
+}
+
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message{
+    [self.scriptDelegate userContentController:userContentController didReceiveScriptMessage:message];
+}
+- (void)dealloc{
+   // NSLog(@"%s",__func__);
+}
+
+@end
+
 
 @interface WKPregressWebView ()<WKScriptMessageHandler>
 @property(nonatomic,strong)ZJProgressView *progressView;
@@ -129,10 +157,11 @@
     [self removeObserver:self forKeyPath:@"estimatedProgress"];
     [self removeObserver:self forKeyPath:@"loading"];
     
-    [_config.userContentController removeAllUserScripts];
     for (NSString *messageName in self.handlerMessageNames) {
         [_config.userContentController removeScriptMessageHandlerForName:messageName];
     }
+    [_config.userContentController removeAllUserScripts];
+    
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
@@ -344,8 +373,10 @@
 
 #pragma mark -- setter
 -(void)setHandlerMessageNames:(NSArray<NSString *> *)handlerMessageNames{
-    for (NSString *messageName in handlerMessageNames) {
-        [_config.userContentController addScriptMessageHandler:self name:messageName];
+    _handlerMessageNames = handlerMessageNames;
+    for (NSString *messageName in _handlerMessageNames) {
+        
+        [_config.userContentController addScriptMessageHandler:[[WeakScriptMessageDelegate alloc] initWithDelegate:self] name:messageName];
     }
 }
 

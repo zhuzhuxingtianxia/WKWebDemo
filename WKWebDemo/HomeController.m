@@ -293,7 +293,9 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
-
+-(void)dealloc{
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
