@@ -227,7 +227,7 @@
     
     params = [self paramsTransformation:params];
     
-    NSString *jstest = [NSString stringWithFormat:
+    NSString *jsCode = [NSString stringWithFormat:
                         @"var element = document.getElementById('%@');"                                               "element.onclick = function(param){"
                                       "%@(%@);"
                             "};"
@@ -235,7 +235,8 @@
                                "window.webkit.messageHandlers.%@.postMessage(param);"
                         "};",elementId,methodName,params,methodName,methodName];
     
-    WKUserScript *JSScript = [[WKUserScript alloc] initWithSource:jstest injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:NO];
+    //可添加一个字典容器，在loading加载完成后，判断该元素是否存在，若存在则注入脚本
+    WKUserScript *JSScript = [[WKUserScript alloc] initWithSource:jsCode injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:NO];
     [self.configuration.userContentController addUserScript:JSScript];
     
 }
