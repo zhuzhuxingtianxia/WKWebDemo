@@ -40,7 +40,12 @@ static NSString *const DAURLProtocolHandledKey = @"DAURLProtocolHandledKey";
  若不需要注册js代码，则可以不使用该方法
  elementId是网页内需要操作标签的id.
  methodName必须要包含在handlerMessageNames数组内,对应代理方法中的message.name
- params参数，对应代理方法中message.body
+ params参数，对应代理方法中message.body。
+ 格式1：push://className/login/1?key1=vaule1&key2=value2
+ push跳转类型，className类名，路径/login/1表示是否需要登陆1需要登陆0不需要。 ？后面时参数
+ 
+ 格式2：@{@"className":@"className",@"login":@"flase",@"params":@{@"key1":@"value1"}}
+ 
  */
 - (void)addScriptElementId:(NSString*)elementId methodName:(NSString*)methodName params:(id)params;
 

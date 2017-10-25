@@ -77,10 +77,11 @@
                           @"param":@{
                                      @"name":@"看是不是跳转"
                                      }};
+    NSString *pp = @"push://MyController/login/1?name=看是不是跳转";
     //div触发事件
     [self.webWkView addScriptElementId:@"eval_pic" methodName:@"outEvaluate" params:dic];
     //跳转按钮
-    [self.webWkView addScriptElementId:@"button2" methodName:@"handleMothed2" params:dic];
+    [self.webWkView addScriptElementId:@"button2" methodName:@"handleMothed2" params:pp];
     
     [self loadWKWeb];
     
@@ -125,7 +126,10 @@
             }
         }
     }else if (message.body){
+        NSURL *messageURL = [NSURL URLWithString:message.body];
+        id createClass = [[NSClassFromString(messageURL.host) alloc] init];
         
+        [self.navigationController pushViewController:createClass animated:YES];
         
     }
     

@@ -253,16 +253,28 @@
 }
 
 - (void)addScriptElementId:(NSString*)elementId methodName:(NSString*)methodName params:(id)params{
-    
-    params = [self paramsTransformation:params];
-    
-    NSString *jsCode = [NSString stringWithFormat:
-                        @"var element = document.getElementById('%@');"                                               "element.onclick = function(param){"
-                                      "%@(%@);"
+    NSString *jsCode;
+    if ([params isKindOfClass:[NSString class]]) {
+        params = [params stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        jsCode = [NSString stringWithFormat:
+                            @"var element = document.getElementById('%@');"                                               "element.onclick = function(param){"
+                            "%@('%@');"
                             "};"
-                        "function %@(param){"
-                               "window.webkit.messageHandlers.%@.postMessage(param);"
-                        "};",elementId,methodName,params,methodName,methodName];
+                            "function %@(param){"
+                            "window.webkit.messageHandlers.%@.postMessage(param);"
+                            "};",elementId,methodName,params,methodName,methodName];
+    }else{
+      params = [self paramsTransformation:params];
+     jsCode = [NSString stringWithFormat:
+                            @"var element = document.getElementById('%@');"                                               "element.onclick = function(param){"
+                            "%@(%@);"
+                            "};"
+                            "function %@(param){"
+                            "window.webkit.messageHandlers.%@.postMessage(param);"
+                            "};",elementId,methodName,params,methodName,methodName];
+    }
+    
+    
     
     //可添加一个字典容器，在loading加载完成后，判断该元素是否存在，若存在则注入脚本
     WKUserScript *JSScript = [[WKUserScript alloc] initWithSource:jsCode injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:NO];
