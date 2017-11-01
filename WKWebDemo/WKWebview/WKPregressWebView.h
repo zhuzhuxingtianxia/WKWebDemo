@@ -48,5 +48,6 @@ static NSString *const DAURLProtocolHandledKey = @"DAURLProtocolHandledKey";
  
  */
 - (void)addScriptElementId:(NSString*)elementId methodName:(NSString*)methodName params:(id)params;
-
+//移除缓存
+-(void)removeCacheData;
 @end

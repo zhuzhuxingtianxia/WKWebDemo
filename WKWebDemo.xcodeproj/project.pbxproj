@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		32A46B22B0CFDE1AF713B877 /* Pods_WKWebDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39568478AE5FC85D11F6ACF2 /* Pods_WKWebDemoUITests.framework */; };
+		B6B51F411FA9705C00B69E7B /* ReplacingImageURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B51F3F1FA9705C00B69E7B /* ReplacingImageURLProtocol.m */; };
+		B6B51F441FA9706700B69E7B /* NSURLProtocol+WebKitSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B51F431FA9706700B69E7B /* NSURLProtocol+WebKitSupport.m */; };
 		B6FEF4821F99919A0019876D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FEF4811F99919A0019876D /* AppDelegate.m */; };
 		B6FEF4881F99919A0019876D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6FEF4861F99919A0019876D /* Main.storyboard */; };
 		B6FEF48A1F99919A0019876D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6FEF4891F99919A0019876D /* Assets.xcassets */; };
@@ -51,6 +53,10 @@
 		A551B49CD51CE2A1CCCDBE10 /* Pods_WKWebDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WKWebDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B433F45D2C35C029D66433DB /* Pods_WKWebDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WKWebDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5A8BFBB4EA189BAC0C00E32 /* Pods-WKWebDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WKWebDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WKWebDemoTests/Pods-WKWebDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B6B51F3F1FA9705C00B69E7B /* ReplacingImageURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplacingImageURLProtocol.m; sourceTree = "<group>"; };
+		B6B51F401FA9705C00B69E7B /* ReplacingImageURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplacingImageURLProtocol.h; sourceTree = "<group>"; };
+		B6B51F421FA9706600B69E7B /* NSURLProtocol+WebKitSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLProtocol+WebKitSupport.h"; sourceTree = "<group>"; };
+		B6B51F431FA9706700B69E7B /* NSURLProtocol+WebKitSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLProtocol+WebKitSupport.m"; sourceTree = "<group>"; };
 		B6FEF47D1F99919A0019876D /* WKWebDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WKWebDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6FEF4801F99919A0019876D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B6FEF4811F99919A0019876D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -188,6 +194,10 @@
 			children = (
 				B6FEF4B71F99BA6C0019876D /* WKPregressWebView.h */,
 				B6FEF4B81F99BA6C0019876D /* WKPregressWebView.m */,
+				B6B51F401FA9705C00B69E7B /* ReplacingImageURLProtocol.h */,
+				B6B51F3F1FA9705C00B69E7B /* ReplacingImageURLProtocol.m */,
+				B6B51F421FA9706600B69E7B /* NSURLProtocol+WebKitSupport.h */,
+				B6B51F431FA9706700B69E7B /* NSURLProtocol+WebKitSupport.m */,
 				B6FEF4C31F99C2A00019876D /* demo.html */,
 			);
 			path = WKWebview;
@@ -487,6 +497,8 @@
 				B6FEF4B91F99BA6D0019876D /* WKPregressWebView.m in Sources */,
 				B6FEF4BC1F99BB070019876D /* TabBarController.m in Sources */,
 				B6FEF4901F99919A0019876D /* main.m in Sources */,
+				B6B51F411FA9705C00B69E7B /* ReplacingImageURLProtocol.m in Sources */,
+				B6B51F441FA9706700B69E7B /* NSURLProtocol+WebKitSupport.m in Sources */,
 				B6FEF4C21F99BB3E0019876D /* MyController.m in Sources */,
 				B6FEF4BF1F99BB280019876D /* HomeController.m in Sources */,
 				B6FEF4821F99919A0019876D /* AppDelegate.m in Sources */,

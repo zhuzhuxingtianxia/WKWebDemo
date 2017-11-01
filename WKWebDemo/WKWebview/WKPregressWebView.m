@@ -307,6 +307,16 @@
     }
 }
 
+-(void)removeCacheData{
+#if __IPHONE_9_0 >= __IPHONE_OS_VERSION_MAX_ALLOWED
+    NSSet* types = [NSSet setWithArray:@[WKWebsiteDataTypeDiskCache, WKWebsiteDataTypeMemoryCache]];
+    [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:types modifiedSince:[NSDate dateWithTimeIntervalSince1970:0] completionHandler:^{
+        
+    }];
+#endif
+    
+}
+
 #pragma mark -- Cookie
 //比如你在登录成功时，保存Cookie
 - (void)saveCookie{
