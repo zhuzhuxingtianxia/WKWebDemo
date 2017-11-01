@@ -1,12 +1,17 @@
 PODS:
   - MJRefresh (3.1.14.1)
+  - SDWebImage (4.1.2):
+    - SDWebImage/Core (= 4.1.2)
+  - SDWebImage/Core (4.1.2)
 
 DEPENDENCIES:
   - MJRefresh (~> 3.1.14)
+  - SDWebImage (= 4.1.2)
 
 SPEC CHECKSUMS:
   MJRefresh: 238e6a37e2dba12160ee3b79f6d2a2b26abcab42
+  SDWebImage: cb6f9f266a9977741efcbc21e618e8be3734c774
 
-PODFILE CHECKSUM: 6e92b570d977b85b2af12686871b43d407c91ef1
+PODFILE CHECKSUM: 71df7436aa924a5cd995fbd20646808b74377b2b
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.0

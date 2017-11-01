@@ -18,9 +18,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    //[NSURLProtocol registerClass:[ReplacingImageURLProtocol class]];
-    //[NSURLProtocol wk_registerScheme:@"http"];
-    //[NSURLProtocol wk_registerScheme:@"https"];
+    [NSURLProtocol registerClass:[ReplacingImageURLProtocol class]];
+    [NSURLProtocol wk_registerScheme:@"http"];
+    [NSURLProtocol wk_registerScheme:@"https"];
     
     return YES;
 }

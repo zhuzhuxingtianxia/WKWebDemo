@@ -7,6 +7,7 @@ target 'WKWebDemo' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
    use_frameworks!
 pod 'MJRefresh','~>3.1.14'
+pod 'SDWebImage', '= 4.1.2'
   # Pods for WKWebDemo
 
   target 'WKWebDemoTests' do

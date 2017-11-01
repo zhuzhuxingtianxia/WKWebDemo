@@ -29,7 +29,7 @@ static NSString *const DAURLProtocolHandledKey = @"DAURLProtocolHandledKey";
 //设置消息名字
 @property(nonatomic,strong)NSArray<NSString*> *handlerMessageNames;
 
-//是否显示在导航条上，默认显示在导航条上YES。
+//是否显示在导航条上，默认不显示在导航条上NO。
 @property(nonatomic,assign)BOOL  showNavbar;
 //进度条颜色，默认safari进度条颜色
 @property(nonatomic,strong)UIColor  *progressColor;

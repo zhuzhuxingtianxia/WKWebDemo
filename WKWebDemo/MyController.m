@@ -39,6 +39,7 @@
     self.webWkView = [[WKPregressWebView alloc] initWKFrame:self.view.bounds];
     self.webWkView.navigationDelegate = self;
     self.webWkView.handlerDelegate = self;
+    self.webWkView.showNavbar = YES;
     _webWkView.progressColor = [UIColor redColor];
     [self.view addSubview:self.webWkView];
     self.webWkView.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadWKWeb)];

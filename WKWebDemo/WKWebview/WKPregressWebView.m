@@ -134,7 +134,6 @@
 }
 
 -(void)setup{
-    self.showNavbar = YES;
     
     //比如我在这个时候保存了Cookie
     [self saveCookie];
@@ -144,6 +143,11 @@
     self.allowsBackForwardNavigationGestures = NO;
     //是否允许3D Touch
     //self.allowsLinkPreview = YES;
+}
+
+-(WKNavigation*)loadRequest:(NSURLRequest *)request{
+    
+    return [super loadRequest:request];
 }
 
 -(void)addListen{
@@ -223,9 +227,10 @@
         }else if ([keyPath isEqualToString:@"loading"]){
             if (self.loading) {
                 //正在加载
-                
+                NSLog(@"正在加载...");
             }else{
               //加载完成
+                NSLog(@"加载完成");
             }
         }else if ([keyPath isEqualToString:@"title"]){
             id objcVC;
@@ -341,8 +346,8 @@
     
     NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:@{
                                                                 NSHTTPCookieName: DAServerSessionCookieName,
-                                                                NSHTTPCookieValue: @"1314521",
-                                                                NSHTTPCookieDomain: @".baidu.com",
+                                                                NSHTTPCookieValue: @"CookieValue",
+                                                                NSHTTPCookieDomain: @"CookieDomain",
                                                                 NSHTTPCookiePath: @"/"
                                                                 }];
     [[NSUserDefaults standardUserDefaults] setObject:cookie.properties forKey:DAUserDefaultsCookieStorageKey];
