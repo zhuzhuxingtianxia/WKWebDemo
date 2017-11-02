@@ -13,7 +13,7 @@ WKWebView加载后内存占用和刷新加载时内存基本一致</br>
  ![img](https://github.com/zhuzhuxingtianxia/WKWebDemo/blob/master/mjweb.png)
 
 ## KVO监听WKWebView的属性
-
+监听estimatedProgress属性，设置web加载进度条！
 
 ## 目标
 ### 拦截图片请求
