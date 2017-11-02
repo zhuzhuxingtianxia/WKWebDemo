@@ -45,13 +45,13 @@ static NSString* const FilteredKey = @"FilteredKey";
 }
 - (void)zj_setImageWithURL:(nullable NSURL *)url
           placeholderImage:(nullable UIImage *)placeholder{
+    
     if (url) {
         SDWebImageManager *manager = [SDWebImageManager sharedManager];
-        [manager loadImageWithURL:url options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+        [manager loadImageWithURL:url options:2 progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
             
         } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
             
-            [manager saveImageToCache:image forURL:url];
             [self replceResponse:image];
             
         }];

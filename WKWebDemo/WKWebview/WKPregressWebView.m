@@ -135,6 +135,7 @@
 
 -(void)setup{
     
+    [self imgReplaceSrc];
     //比如我在这个时候保存了Cookie
     [self saveCookie];
     
@@ -305,11 +306,49 @@
     
 }
 
+-(void)imgReplaceSrc {
+    //防止频繁IO操作，造成性能影响
+    static NSString *jsSource;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        jsSource = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ImgSRCReplace" ofType:@"js"] encoding:NSUTF8StringEncoding error:nil];
+    });
+    //添加自定义的脚本
+    WKUserScript *js = [[WKUserScript alloc] initWithSource:jsSource injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:NO];
+    [self.configuration.userContentController addUserScript:js];
+    //注册回调
+    [self.configuration.userContentController addScriptMessageHandler:[[WeakScriptMessageDelegate alloc] initWithDelegate:self] name:@"imageSrcReplace"];
+}
+
 #pragma mark -- WKScriptMessageHandler
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message{
-    if ([self.handlerDelegate respondsToSelector:@selector(userContent:didReceiveScriptMessage:)]) {
-        [self.handlerDelegate userContent:userContentController didReceiveScriptMessage:message];
+    if ([message.name isEqualToString:@"imageSrcReplace"]) {
+        NSLog(@"---%@",message.body);
+        NSDictionary *replaceData = message.body;
+        /*
+        //读取js function的字符串
+        NSString *jsFunctionString = replaceData[@"callBack"];
+        //拼接调用该方法的js字符串
+        NSString *imgurl = replaceData[@"imgUrl"];
+        NSString *callbackJs = [NSString stringWithFormat:@"(%@)('%@');", jsFunctionString, imgurl];
+        */
+        
+        NSString *index = replaceData[@"index"];
+        NSString *path = @"http://www.mf08s.com/y/q/UploadFiles_q/20110513/2011051309100640.jpg";//[[NSBundle mainBundle] pathForResource:@"wk" ofType:@"png"];
+        NSString *callbackJs = [NSString stringWithFormat:@"callBackReplace('%@','%@');",path,index];
+        [self evaluateJavaScript:callbackJs completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+            if (!error) {
+                NSLog(@"模拟回调result = %@",result);
+            }
+        }];
+        
+    }else{
+        
+        if ([self.handlerDelegate respondsToSelector:@selector(userContent:didReceiveScriptMessage:)]) {
+            [self.handlerDelegate userContent:userContentController didReceiveScriptMessage:message];
+        }
     }
+    
 }
 
 -(void)removeCacheData{

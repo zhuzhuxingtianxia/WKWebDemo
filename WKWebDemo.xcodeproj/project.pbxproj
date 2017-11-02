@@ -10,6 +10,8 @@
 		32A46B22B0CFDE1AF713B877 /* Pods_WKWebDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39568478AE5FC85D11F6ACF2 /* Pods_WKWebDemoUITests.framework */; };
 		B6B51F411FA9705C00B69E7B /* ReplacingImageURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B51F3F1FA9705C00B69E7B /* ReplacingImageURLProtocol.m */; };
 		B6B51F441FA9706700B69E7B /* NSURLProtocol+WebKitSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B51F431FA9706700B69E7B /* NSURLProtocol+WebKitSupport.m */; };
+		B6B51F461FA9D44F00B69E7B /* ImgSRCReplace.js in Resources */ = {isa = PBXBuildFile; fileRef = B6B51F451FA9D44F00B69E7B /* ImgSRCReplace.js */; };
+		B6C592EE1FAACF3E000FE291 /* wk.png in Resources */ = {isa = PBXBuildFile; fileRef = B6C592ED1FAACF3E000FE291 /* wk.png */; };
 		B6FEF4821F99919A0019876D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FEF4811F99919A0019876D /* AppDelegate.m */; };
 		B6FEF4881F99919A0019876D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6FEF4861F99919A0019876D /* Main.storyboard */; };
 		B6FEF48A1F99919A0019876D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6FEF4891F99919A0019876D /* Assets.xcassets */; };
@@ -57,6 +59,8 @@
 		B6B51F401FA9705C00B69E7B /* ReplacingImageURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplacingImageURLProtocol.h; sourceTree = "<group>"; };
 		B6B51F421FA9706600B69E7B /* NSURLProtocol+WebKitSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLProtocol+WebKitSupport.h"; sourceTree = "<group>"; };
 		B6B51F431FA9706700B69E7B /* NSURLProtocol+WebKitSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLProtocol+WebKitSupport.m"; sourceTree = "<group>"; };
+		B6B51F451FA9D44F00B69E7B /* ImgSRCReplace.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ImgSRCReplace.js; sourceTree = "<group>"; };
+		B6C592ED1FAACF3E000FE291 /* wk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wk.png; sourceTree = SOURCE_ROOT; };
 		B6FEF47D1F99919A0019876D /* WKWebDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WKWebDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6FEF4801F99919A0019876D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B6FEF4811F99919A0019876D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -194,6 +198,8 @@
 			children = (
 				B6FEF4B71F99BA6C0019876D /* WKPregressWebView.h */,
 				B6FEF4B81F99BA6C0019876D /* WKPregressWebView.m */,
+				B6B51F451FA9D44F00B69E7B /* ImgSRCReplace.js */,
+				B6C592ED1FAACF3E000FE291 /* wk.png */,
 				B6B51F401FA9705C00B69E7B /* ReplacingImageURLProtocol.h */,
 				B6B51F3F1FA9705C00B69E7B /* ReplacingImageURLProtocol.m */,
 				B6B51F421FA9706600B69E7B /* NSURLProtocol+WebKitSupport.h */,
@@ -329,8 +335,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6FEF48D1F99919A0019876D /* LaunchScreen.storyboard in Resources */,
+				B6C592EE1FAACF3E000FE291 /* wk.png in Resources */,
 				B6FEF4C41F99C2A00019876D /* demo.html in Resources */,
 				B6FEF48A1F99919A0019876D /* Assets.xcassets in Resources */,
+				B6B51F461FA9D44F00B69E7B /* ImgSRCReplace.js in Resources */,
 				B6FEF4881F99919A0019876D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
