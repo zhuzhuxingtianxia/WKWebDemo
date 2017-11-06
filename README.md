@@ -3,6 +3,8 @@
     WKWebView的使用
 
 ## WKWebView和UIWebView性能对比
+[![img](https://github.com/zhuzhuxingtianxia/WKWebDemo/blob/master/web.png)]
+[![img](https://github.com/zhuzhuxingtianxia/WKWebDemo/blob/master/wk.png)]
 
 UIWebView加载后的内存占用</br>
 ![img](https://github.com/zhuzhuxingtianxia/WKWebDemo/blob/master/web.png)
