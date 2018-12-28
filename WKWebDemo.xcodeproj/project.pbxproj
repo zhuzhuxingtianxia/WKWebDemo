@@ -8,10 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		32A46B22B0CFDE1AF713B877 /* Pods_WKWebDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39568478AE5FC85D11F6ACF2 /* Pods_WKWebDemoUITests.framework */; };
+		B6A5420721D4F9BD00B3A99B /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A5420621D4F9BD00B3A99B /* WebViewController.m */; };
 		B6B51F411FA9705C00B69E7B /* ReplacingImageURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B51F3F1FA9705C00B69E7B /* ReplacingImageURLProtocol.m */; };
 		B6B51F441FA9706700B69E7B /* NSURLProtocol+WebKitSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B51F431FA9706700B69E7B /* NSURLProtocol+WebKitSupport.m */; };
 		B6B51F461FA9D44F00B69E7B /* ImgSRCReplace.js in Resources */ = {isa = PBXBuildFile; fileRef = B6B51F451FA9D44F00B69E7B /* ImgSRCReplace.js */; };
 		B6C592EE1FAACF3E000FE291 /* wk.png in Resources */ = {isa = PBXBuildFile; fileRef = B6C592ED1FAACF3E000FE291 /* wk.png */; };
+		B6EA927E21D5ED2800544CBA /* webview.html in Resources */ = {isa = PBXBuildFile; fileRef = B6EA927D21D5ED2800544CBA /* webview.html */; };
 		B6FEF4821F99919A0019876D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FEF4811F99919A0019876D /* AppDelegate.m */; };
 		B6FEF4881F99919A0019876D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6FEF4861F99919A0019876D /* Main.storyboard */; };
 		B6FEF48A1F99919A0019876D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6FEF4891F99919A0019876D /* Assets.xcassets */; };
@@ -55,12 +57,15 @@
 		A551B49CD51CE2A1CCCDBE10 /* Pods_WKWebDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WKWebDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B433F45D2C35C029D66433DB /* Pods_WKWebDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WKWebDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5A8BFBB4EA189BAC0C00E32 /* Pods-WKWebDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WKWebDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WKWebDemoTests/Pods-WKWebDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B6A5420521D4F9BD00B3A99B /* WebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		B6A5420621D4F9BD00B3A99B /* WebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		B6B51F3F1FA9705C00B69E7B /* ReplacingImageURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplacingImageURLProtocol.m; sourceTree = "<group>"; };
 		B6B51F401FA9705C00B69E7B /* ReplacingImageURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplacingImageURLProtocol.h; sourceTree = "<group>"; };
 		B6B51F421FA9706600B69E7B /* NSURLProtocol+WebKitSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLProtocol+WebKitSupport.h"; sourceTree = "<group>"; };
 		B6B51F431FA9706700B69E7B /* NSURLProtocol+WebKitSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLProtocol+WebKitSupport.m"; sourceTree = "<group>"; };
 		B6B51F451FA9D44F00B69E7B /* ImgSRCReplace.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ImgSRCReplace.js; sourceTree = "<group>"; };
 		B6C592ED1FAACF3E000FE291 /* wk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wk.png; sourceTree = SOURCE_ROOT; };
+		B6EA927D21D5ED2800544CBA /* webview.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = webview.html; sourceTree = "<group>"; };
 		B6FEF47D1F99919A0019876D /* WKWebDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WKWebDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6FEF4801F99919A0019876D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B6FEF4811F99919A0019876D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -163,6 +168,8 @@
 				B6FEF4C61F99E93B0019876D /* NavigationController.m */,
 				B6FEF4BD1F99BB280019876D /* HomeController.h */,
 				B6FEF4BE1F99BB280019876D /* HomeController.m */,
+				B6A5420521D4F9BD00B3A99B /* WebViewController.h */,
+				B6A5420621D4F9BD00B3A99B /* WebViewController.m */,
 				B6FEF4C01F99BB3E0019876D /* MyController.h */,
 				B6FEF4C11F99BB3E0019876D /* MyController.m */,
 				B6FEF4B61F99BA6C0019876D /* WKWebview */,
@@ -205,6 +212,7 @@
 				B6B51F421FA9706600B69E7B /* NSURLProtocol+WebKitSupport.h */,
 				B6B51F431FA9706700B69E7B /* NSURLProtocol+WebKitSupport.m */,
 				B6FEF4C31F99C2A00019876D /* demo.html */,
+				B6EA927D21D5ED2800544CBA /* webview.html */,
 			);
 			path = WKWebview;
 			sourceTree = "<group>";
@@ -231,7 +239,6 @@
 				B6FEF47A1F99919A0019876D /* Frameworks */,
 				B6FEF47B1F99919A0019876D /* Resources */,
 				D52FB7580A425F4D50868192 /* [CP] Embed Pods Frameworks */,
-				0C1442F7BB785694F9A09DF7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -250,8 +257,6 @@
 				B6FEF4911F99919A0019876D /* Sources */,
 				B6FEF4921F99919A0019876D /* Frameworks */,
 				B6FEF4931F99919A0019876D /* Resources */,
-				DF7000F35245789CBE6D432E /* [CP] Embed Pods Frameworks */,
-				655B6A9F6C2768775DC38948 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -271,8 +276,6 @@
 				B6FEF49C1F99919A0019876D /* Sources */,
 				B6FEF49D1F99919A0019876D /* Frameworks */,
 				B6FEF49E1F99919A0019876D /* Resources */,
-				BF24F86E5E4B0DE417D17EAE /* [CP] Embed Pods Frameworks */,
-				D84D7E11A631B2974773B2FB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -334,6 +337,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6EA927E21D5ED2800544CBA /* webview.html in Resources */,
 				B6FEF48D1F99919A0019876D /* LaunchScreen.storyboard in Resources */,
 				B6C592EE1FAACF3E000FE291 /* wk.png in Resources */,
 				B6FEF4C41F99C2A00019876D /* demo.html in Resources */,
@@ -360,64 +364,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0C1442F7BB785694F9A09DF7 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WKWebDemo/Pods-WKWebDemo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		655B6A9F6C2768775DC38948 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WKWebDemoTests/Pods-WKWebDemoTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		AC6195CFC063DE5E6A8FE5BB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WKWebDemoTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		BF24F86E5E4B0DE417D17EAE /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WKWebDemoUITests/Pods-WKWebDemoUITests-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D52FB7580A425F4D50868192 /* [CP] Embed Pods Frameworks */ = {
@@ -426,28 +388,20 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-WKWebDemo/Pods-WKWebDemo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/NJKWebViewProgress/NJKWebViewProgress.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NJKWebViewProgress.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WKWebDemo/Pods-WKWebDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D84D7E11A631B2974773B2FB /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WKWebDemoUITests/Pods-WKWebDemoUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DC85E5925792B40E91474ED5 /* [CP] Check Pods Manifest.lock */ = {
@@ -456,28 +410,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WKWebDemoUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		DF7000F35245789CBE6D432E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WKWebDemoTests/Pods-WKWebDemoTests-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E9BAE6922DE982EE6AEA04C3 /* [CP] Check Pods Manifest.lock */ = {
@@ -486,13 +428,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WKWebDemo-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -503,6 +448,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6FEF4B91F99BA6D0019876D /* WKPregressWebView.m in Sources */,
+				B6A5420721D4F9BD00B3A99B /* WebViewController.m in Sources */,
 				B6FEF4BC1F99BB070019876D /* TabBarController.m in Sources */,
 				B6FEF4901F99919A0019876D /* main.m in Sources */,
 				B6B51F411FA9705C00B69E7B /* ReplacingImageURLProtocol.m in Sources */,
@@ -675,7 +621,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = D9FD56NYNC;
 				INFOPLIST_FILE = WKWebDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -691,7 +637,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = D9FD56NYNC;
 				INFOPLIST_FILE = WKWebDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @interface HomeController : UIViewController
 @property(nonatomic,copy)NSString *urlString;
 @end

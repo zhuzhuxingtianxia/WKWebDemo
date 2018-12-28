@@ -22,10 +22,10 @@
     
 }
 - (void)setTabBarChildController{
-    NSArray *titleArray = @[@"首页",@"我的"];
-    NSArray *imageArray = @[@"tab_btn_home_default",@"sy_table_wdicon_wxz"];
-    NSArray *imageSelectArray =@[@"tab_btn_home_selected",@"tab_btn_mypage_selected"];
-    NSArray *classNames = @[@"HomeController", @"MyController"];
+    NSArray *titleArray = @[@"WKWebView",@"UIWebView",@"我的"];
+    NSArray *imageArray = @[@"tab_btn_home_default",@"tab_btn_home_default",@"sy_table_wdicon_wxz"];
+    NSArray *imageSelectArray =@[@"tab_btn_home_selected",@"tab_btn_home_selected",@"tab_btn_mypage_selected"];
+    NSArray *classNames = @[@"HomeController",@"WebViewController", @"MyController"];
     
     for (int j=0;j<classNames.count;j++) {
         NSString *className = classNames[j];

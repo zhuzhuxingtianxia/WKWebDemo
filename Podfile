@@ -8,6 +8,7 @@ target 'WKWebDemo' do
    use_frameworks!
 pod 'MJRefresh','~>3.1.14'
 pod 'SDWebImage', '= 4.1.2'
+pod 'NJKWebViewProgress', '~> 0.2.3'
   # Pods for WKWebDemo
 
   target 'WKWebDemoTests' do

@@ -1,17 +1,30 @@
 PODS:
   - MJRefresh (3.1.14.1)
+  - NJKWebViewProgress (0.2.3):
+    - NJKWebViewProgress/Core (= 0.2.3)
+    - NJKWebViewProgress/ProgressView (= 0.2.3)
+  - NJKWebViewProgress/Core (0.2.3)
+  - NJKWebViewProgress/ProgressView (0.2.3)
   - SDWebImage (4.1.2):
     - SDWebImage/Core (= 4.1.2)
   - SDWebImage/Core (4.1.2)
 
 DEPENDENCIES:
   - MJRefresh (~> 3.1.14)
+  - NJKWebViewProgress (~> 0.2.3)
   - SDWebImage (= 4.1.2)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - MJRefresh
+    - NJKWebViewProgress
+    - SDWebImage
 
 SPEC CHECKSUMS:
   MJRefresh: 238e6a37e2dba12160ee3b79f6d2a2b26abcab42
+  NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
   SDWebImage: cb6f9f266a9977741efcbc21e618e8be3734c774
 
-PODFILE CHECKSUM: 71df7436aa924a5cd995fbd20646808b74377b2b
+PODFILE CHECKSUM: b1bd7c45529099e0b9550f6f854f8d96b95c9e93
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.5.3

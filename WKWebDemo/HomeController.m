@@ -6,12 +6,12 @@
 //  Copyright © 2017年 Jion. All rights reserved.
 //
 #import <objc/runtime.h>
+#import <JavaScriptCore/JavaScriptCore.h>
 #import "HomeController.h"
 #import "WKPregressWebView.h"
 #import "MJRefresh.h"
-@interface HomeController ()<WKNavigationDelegate,WKUIDelegate,WKHandlerDelegate,UIWebViewDelegate>
+@interface HomeController ()<WKNavigationDelegate,WKUIDelegate,WKHandlerDelegate>
 @property(nonatomic,strong)WKPregressWebView *webWkView;
-@property(nonatomic,strong)UIWebView  *webview;
 @end
 
 @implementation HomeController
@@ -32,32 +32,8 @@
 }
 
 -(void)changeWeb{
-  BOOL change = YES;
-    if (change) {
-        self.navigationItem.title = @"WK主页";
-        [self buildWKwebView];
-    }else{
-        self.navigationItem.title = @"Web主页";
-        [self buildwebView];
-        
-    }
-}
-
--(void)buildwebView{
-    _webview = [[UIWebView alloc] initWithFrame:self.view.bounds];
-    _webview.delegate = self;
-    [self.view addSubview:_webview];
-    
-    _webview.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadWebView)];
-    [self loadWebView];
-}
-
--(void)loadWebView{
-    if (_urlString) {
-        [_webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlString]]];
-    }else{
-        [_webview loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"demo" ofType:@"html"]]]];
-    }
+    self.navigationItem.title = @"WK主页";
+    [self buildWKwebView];
 }
 
 -(void)buildWKwebView{
@@ -304,22 +280,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-#pragma mark --
-- (void)webViewDidFinishLoad:(UIWebView *)webView{
-    [webView.scrollView.mj_header endRefreshing];
-}
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
-    [webView.scrollView.mj_header endRefreshing];
-}
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

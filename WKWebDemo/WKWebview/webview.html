@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes">
+            <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+            <meta name="format-detection" content="telephone=no" />
+            <title>导航标题</title>
+            
+            <!-- css -->
+            <style type="text/css">
+                
+            </style>
+            <!-- script  -->
+            <script>
+                function changeColor() {
+                    var obj = document.getElementById("jsCore");
+                    obj.style.backgroundColor = "red";
+                    console.log("changeColor");
+                }
+            </script>
+            
+    </head>
+    <body>
+        <div style="text-align:center;">
+            
+            <button id="jsCore" class="myClass" name="myName"
+                style="padding:20px 40px;margin-top:30px" onclick="jsMethodName()">
+              UIWebViewjsCore交互
+            </button>
+            <p id="pp" name="pp">123</p>
+            
+        </div>
+        <!-- script  -->
+        <script>
+        //uiwebView的交互方法,在UIWebView中有效
+        function jsMethodName(){
+            var p = document.getElementById('pp');
+            p.innerHTML = '修改值'
+            var params = {title:"标题",message:"这就是交互返回的内容"};
+            console.log(params);
+            jsCore.jsMethodName(JSON.stringify(params))
+        }
+        
+        
+        </script>
+        
+    </body>
+    
+</html>
