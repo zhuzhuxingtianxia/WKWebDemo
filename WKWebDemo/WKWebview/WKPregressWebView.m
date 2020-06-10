@@ -114,6 +114,7 @@
 @interface WKPregressWebView ()<WKScriptMessageHandler>
 @property(nonatomic,strong)ZJProgressView *progressView;
 @property(nonatomic,strong)WKWebViewConfiguration *config;
+@property (nonatomic,strong)NSMutableArray<NSString*> *messageNames;
 @end
 @implementation WKPregressWebView
 
@@ -163,6 +164,9 @@
     [self removeObserver:self forKeyPath:@"loading"];
     
     for (NSString *messageName in self.handlerMessageNames) {
+        [_config.userContentController removeScriptMessageHandlerForName:messageName];
+    }
+    for (NSString *messageName in self.messageNames) {
         [_config.userContentController removeScriptMessageHandlerForName:messageName];
     }
     [_config.userContentController removeAllUserScripts];
@@ -258,6 +262,62 @@
     
 }
 
+-(void)setEnableLog:(BOOL)enableLog {
+    _enableLog = enableLog;
+    NSString *eventName = @"log";
+    if (enableLog) {
+        NSString *jsLog = @""
+        "console.log=(function(logFunc){"
+            "return function(content){"
+                "window.webkit.messageHandlers.log.postMessage(JSON.stringify(content));"
+                "logFunc.call(console,content)"
+            "}"
+        "})(console.log);";
+        
+        WKUserScript *JSScript = [[WKUserScript alloc] initWithSource:jsLog injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:NO];
+        [self.configuration.userContentController addUserScript:JSScript];
+        
+        //注册回调
+        [self.configuration.userContentController addScriptMessageHandler:[[WeakScriptMessageDelegate alloc] initWithDelegate:self] name:eventName];
+        if (![self.messageNames containsObject:eventName]) {
+            [self.messageNames addObject:eventName];
+        }
+    }else{
+        [self.configuration.userContentController removeScriptMessageHandlerForName:eventName];
+        if ([self.messageNames containsObject:eventName]) {
+            [self.messageNames removeObject:eventName];
+        }
+    }
+}
+
+-(void)removeEventListenerWithName:(NSString*)eventName {
+    if (eventName && eventName.length>0) {
+        [self.configuration.userContentController removeScriptMessageHandlerForName:eventName];
+        if ([self.messageNames containsObject:eventName]) {
+            [self.messageNames removeObject:eventName];
+        }
+    }
+}
+
+-(void)addEventListenerWithName:(NSString*)eventName {
+    if (eventName && eventName.length>0) {
+        NSString *stringJS = [NSString stringWithFormat:@"("
+                                "window.addEventListener('message',function(e){"
+                                    "window.webkit.messageHandlers.%@.postMessage(e.data);"
+                                "})"
+                              ")",eventName];
+        WKUserScript *JSScript = [[WKUserScript alloc] initWithSource:stringJS injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:NO];
+        [self.configuration.userContentController addUserScript:JSScript];
+        
+        //注册回调
+        [self.configuration.userContentController addScriptMessageHandler:[[WeakScriptMessageDelegate alloc] initWithDelegate:self] name:eventName];
+        if (![self.messageNames containsObject:eventName]) {
+            [self.messageNames addObject:eventName];
+        }
+        
+    }
+}
+
 - (void)addScriptElementId:(NSString*)elementId methodName:(NSString*)methodName params:(id)params{
     NSString *jsCode;
     if ([params isKindOfClass:[NSString class]]) {
@@ -342,6 +402,10 @@
             }
         }];
         
+    }else if([message.name isEqualToString:@"log"]){
+        if (self.enableLog) {
+            NSLog(@"jsLog:%@",message.body);
+        }
     }else{
         
         if ([self.handlerDelegate respondsToSelector:@selector(userContent:didReceiveScriptMessage:)]) {
@@ -467,5 +531,11 @@
     return _progressView;
 }
 
+-(NSMutableArray<NSString*>*)messageNames {
+    if (!_messageNames) {
+        _messageNames = [[NSMutableArray alloc] init];
+    }
+    return _messageNames;
+}
 
 @end
