@@ -34,6 +34,7 @@
 }
 -(void)loadWebView{
 //    _urlString = @"https://app2.taocaimall.com:4114/taocaimall/inviteFriend.htm?sessionId=2518C5081DF476921A23654623680733&version=ios3.4.00";
+    _urlString = @"https://iiwpp-est-pare-stg1.pingan.com.cn/capitalPlan";
     if (_urlString) {
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlString]]];
     }else{
