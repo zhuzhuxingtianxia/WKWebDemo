@@ -15,7 +15,7 @@ DEPENDENCIES:
   - SDWebImage (= 4.1.2)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - MJRefresh
     - NJKWebViewProgress
     - SDWebImage
@@ -25,6 +25,6 @@ SPEC CHECKSUMS:
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
   SDWebImage: cb6f9f266a9977741efcbc21e618e8be3734c774
 
-PODFILE CHECKSUM: b1bd7c45529099e0b9550f6f854f8d96b95c9e93
+PODFILE CHECKSUM: 4c45e83989366e01e87a2e2efdba8b5c5b46a466
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.11.3

@@ -388,7 +388,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-WKWebDemo/Pods-WKWebDemo-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-WKWebDemo/Pods-WKWebDemo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/NJKWebViewProgress/NJKWebViewProgress.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -401,7 +401,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WKWebDemo/Pods-WKWebDemo-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WKWebDemo/Pods-WKWebDemo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DC85E5925792B40E91474ED5 /* [CP] Check Pods Manifest.lock */ = {
@@ -623,7 +623,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D9FD56NYNC;
 				INFOPLIST_FILE = WKWebDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.youjuke.WKWebDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -639,7 +639,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D9FD56NYNC;
 				INFOPLIST_FILE = WKWebDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.youjuke.WKWebDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";

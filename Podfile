@@ -1,7 +1,8 @@
+source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
 project 'WKWebDemo.xcodeproj'
 
 # Uncomment the next line to define a global platform for your project
- platform :ios, '8.0'
+ platform :ios, '12.0'
 
 target 'WKWebDemo' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks

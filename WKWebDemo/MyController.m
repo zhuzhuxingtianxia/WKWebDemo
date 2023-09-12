@@ -10,7 +10,7 @@
 #import "MJRefresh.h"
 #import "WKPregressWebView.h"
 
-@interface MyController ()<WKNavigationDelegate,WKHandlerDelegate>
+@interface MyController ()<WKNavigationDelegate,WKUIDelegate,WKHandlerDelegate>
 @property(nonatomic,strong)WKPregressWebView *webWkView;
 @end
 
@@ -38,6 +38,7 @@
     
     self.webWkView = [[WKPregressWebView alloc] initWKFrame:self.view.bounds];
     self.webWkView.navigationDelegate = self;
+    self.webWkView.UIDelegate = self;
     self.webWkView.handlerDelegate = self;
     self.webWkView.showNavbar = YES;
     _webWkView.progressColor = [UIColor redColor];
@@ -127,6 +128,10 @@
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
     NSLog(@"========5");
     [self evaluateJavaScript];
+//    NSString *script = [NSString stringWithFormat:@"%@('%@')",@"(function(s){ window.Unity = {}; setTimeout(function(){ alert('Hello from JavaScript!')},3000)})",@""];
+//    [self.webWkView evaluateJavaScript:script completionHandler:^(id _Nullable cookies, NSError * _Nullable error) {
+//        NSLog(@"调用evaluateJavaScript异步获取");
+//    }];
     [webView.scrollView.mj_header endRefreshing];
 }
 
@@ -138,6 +143,52 @@
 // 接收到服务器跳转请求之后再执行
 - (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation{
     NSLog(@"======7");
+}
+#pragma mark -- WKUIDelegate
+- (WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures{
+
+    NSLog(@"%@\n", NSStringFromSelector(_cmd));
+    return nil;
+}
+
+- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(nonnull void (^)(void))completionHandler{
+    //js 里面的alert实现，如果不实现，网页的alert函数无效
+   NSLog(@"%@\n", NSStringFromSelector(_cmd));
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message?:@"" preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:([UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler();
+    }])];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL))completionHandler {
+    //  js 里面的alert实现，如果不实现，网页的alert函数无效  ,
+   NSLog(@"%@\n", NSStringFromSelector(_cmd));
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message?:@"" preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:([UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler(NO);
+    }])];
+    [alertController addAction:([UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler(YES);
+    }])];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString *))completionHandler{
+    //用于和JS交互，弹出输入框
+   NSLog(@"%@\n", NSStringFromSelector(_cmd));
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:prompt message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.text = defaultText;
+    }];
+    [alertController addAction:([UIAlertAction actionWithTitle:@"完成" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler(alertController.textFields[0].text?:@"");
+    }])];
+    
+    
+    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
